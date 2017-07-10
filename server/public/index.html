@@ -1,0 +1,21 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Editor</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div class="row" id="root"></div>
+
+    <!-- Needed before scripts to use jQuery (and others) with electronjs -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <script src="js/bundle.js"></script>
+
+    <!-- Needed after scripts to use jQuery (and others) with electronjs -->
+    <script>if (window.module) module = window.module;</script>
+  </body>
+</html>
