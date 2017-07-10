@@ -18,17 +18,17 @@ client            | Contains all desktop client-related files
 
 # Build and Start Commands
 The server uses [webpack](https://webpack.github.io) and [babel](https://babeljs.io) to transpile and bundle the remote desktop app.  You can build and start the server using the below commands.
-'''
+```bash
 [dev@box ~/electron-react-starter]$ cd server
 [dev@box ~/electron-react-starter/server]$ npm run build
 [dev@box ~/electron-react-starter/server]$ npm start
-'''
+```
 
 The client currently only needs to be started.
-'''
+```bash
 [dev@box ~/electron-react-starter]$ cd client
 [dev@box ~/electron-react-starter/client]$ npm start
-'''
+```
 
 # LICENSE
 ISC
