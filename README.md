@@ -30,7 +30,7 @@ The client currently only needs to be started.
 [dev@box ~/electron-react-starter/client]$ npm start
 ```
 
-# LICENSE
+# License
 ISC
 
 
