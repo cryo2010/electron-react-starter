@@ -1,17 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import * as firebase from 'firebase';
 import FirebaseAuthenticator from './firebase-authenticator'
 import Avatar from 'material-ui/Avatar';
 
-export default class Application extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: null
-    };
-    this.isSubscribed = false;
-    this.onStoreEvent = this.onStoreEvent.bind(this);
     this.initializeFirebase();
   }
 
@@ -31,23 +26,8 @@ export default class Application extends React.Component {
     this.authProvider.addScope('profile');
   }
 
-  subscribeToStore() {
-    if (!this.isSubscribed) {
-      this.context.store.subscribe(this.onStoreEvent);
-      this.isSubscribed = true;
-    }
-  }
-
-  onStoreEvent() {
-    const state = this.context.store.getState();
-    if (state.user != this.state.user) {
-      this.setState({user: state.user});
-    }
-  }
-
   render() {
-    this.subscribeToStore();
-    if (!this.state.user) {
+    if (!this.props.user) {
       return (
         <div>
           <FirebaseAuthenticator provider={this.authProvider} />
@@ -56,16 +36,19 @@ export default class Application extends React.Component {
     } else {
       return (
         <div>
-          <Avatar src={this.state.user.photoURL} />
-          {this.state.user.displayName}
+          <Avatar src={this.props.user.photoURL} />
+          {this.props.user.displayName}
         </div>
       );
     }
   }
 }
 
-Application.contextTypes = {
-  store: PropTypes.object.isRequired
-};
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
 
-
+const Application = connect(mapStateToProps)(App);
+export default Application;
