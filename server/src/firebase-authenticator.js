@@ -2,8 +2,9 @@ import * as firebase from 'firebase';
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as actions from './actions';
+import {connect} from 'react-redux';
 
-export default class FirebaseAuthenticator extends React.Component {
+class FirebaseAuth extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,7 +14,7 @@ export default class FirebaseAuthenticator extends React.Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         const ev = {type: actions.SIGN_IN_EVENT, user};
-        self.context.store.dispatch(ev);
+        self.props.dispatch(ev);
       } else {
         firebase.auth().signInWithRedirect(self.props.provider);
       }
@@ -24,10 +25,16 @@ export default class FirebaseAuthenticator extends React.Component {
   } 
 }
 
-FirebaseAuthenticator.propTypes = {
+FirebaseAuth.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   provider: PropTypes.object.isRequired
 };
 
-FirebaseAuthenticator.contextTypes = {
-  store: PropTypes.object.isRequired
-};
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch
+  };
+}
+
+const FirebaseAuthenticator = connect(mapDispatchToProps)(FirebaseAuth);
+export default FirebaseAuthenticator;
