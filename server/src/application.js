@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 import FirebaseAuthenticator from './firebase-authenticator'
 import Avatar from 'material-ui/Avatar';
@@ -43,6 +44,10 @@ class App extends React.Component {
     }
   }
 }
+
+App.propTypes = {
+  user: PropTypes.object
+};
 
 function mapStateToProps(state) {
   return {
